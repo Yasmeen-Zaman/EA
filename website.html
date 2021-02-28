@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>Art Gallary</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Art Gallery</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="website.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="acrylicpaint.html">Acrylic Paint</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="oilpaint.html">Oil Paint</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="pencilsketch.html">Pencil Sketch</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-warning" type="submit">Search</button>
+          </form>
+          <div class="mx-2">
+            <button class="btn btn-warning" data-toggle="modal" data-target="#loginModal">Login</button>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#signupModal">SignUp</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Login to iCoder</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Sign Up Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Get an iCoder Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="form-group">
+            <label for="cexampleInputPassword1">Confirm Password</label>
+            <input type="password" class="form-control" id="cexampleInputPassword1">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Creat Account</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Slider -->
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="1.jfif" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Online Art Gallery</h5>
+            <p>One of the most reputer art gallery across the globe</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="o2.jfif" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Welcome to Online Arts</h5>
+            <p>Have some fun with colors</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="s3.jfif" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Come on join us</h5>
+            <p>Put your thoughts onto canvas and let us know</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"  data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <div class="container-fluid">
+        <center>
+          <h1>Online Art Gallery</h1>
+          <p>One of the most reputed online art gallery</p>
+        </center>
+        
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="o11.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Pink Water Lilly</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="s10.jpg" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">The Jungle</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="a8.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Ripples in Water</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="o4.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Flowers all around</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="s7.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Contruction Workers</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="o6.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Flowers</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="a6.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Patch Painting</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="s9.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Old home in village</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="a7.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Abstract Stuctures</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="o10.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Travel</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="a5.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">Bridge over the river</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="o3.jfif" class="card-img-top" alt="..." height="200px">
+                    <div class="card-body">
+                        <h5 class="card-title">irregular</h5>
+                        <center><div class="row"><div class="col-sm-3"><a href="#" class="btn btn-warning">View</a></div><div class="col-sm-6"><a href="#" class="btn btn-secondary">Like<span class="badge bg-secondary">9</span></a></div></div></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="container py-5">
+      <div class="row">
+          <div class="col-3 col-mb">
+              <h5>About</h5>
+              <ul class="list-unstyled text-small">
+                  <li><a class="link-secondary" href="#">Team</a></li>
+                  <li><a class="link-secondary" href="#">Locations</a></li>
+                  <li><a class="link-secondary" href="#">Privacy</a></li>
+                  <li><a class="link-secondary" href="#">Terms</a></li>
+              </ul>
+          </div>
+          <div class="col-3 col-mb">
+              <center>
+                  <h5>Social Sites</h5>
+                  <ul class="list-unstyled text-small">
+                      <li><a class="link-secondary" href="#"><img src="insta.jpg" width="30px" height="30px"></a></li>
+                      <li><a class="link-secondary" href="#"><img src="facebook.png" width="30px" height="30px"></a>
+                      </li>
+                      <li><a class="link-secondary" href="#"><img src="twitter.png" width="30px" height="30px"></a>
+                      </li>
+                      <li><a class="link-secondary" href="#"><img src="youtube.png" width="60px" height="30px"></a>
+                      </li>
+                  </ul>
+              </center>
+          </div>
+
+      </div>
+  </footer>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
