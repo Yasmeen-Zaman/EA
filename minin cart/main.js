@@ -217,7 +217,7 @@ function addItemsInTable(i) {
     var str = "";
     let num = 1;
     for (let j = 0; j < localCart.length; j++) {
-        str += "<tr id='" + localCart[j].id + "'><td><img src='" + localCart[j].imgg + "' width='50px' height='50px'></td><td>" + localCart[j].name + "</td><td><div class='d-felx content-align-left'><button class='btn btn-sm btn-warning sub'><img src='minus.png' width='15px' height='15px'></button><span class='Qnty p-3'>" + num + "</span><button  class='btn btn-sm btn-success add'><img src='plus.png' width='15px' height='15px'></button><button  class='btn btn-sm btn-danger dlt'><img src='dlt.png' width='15px' height='15px'></button></div></td><td class='unit'>" + localCart[j].price + "</td><td class='total'>" + parseFloat(localCart[j].price) * num + "</td></tr>";
+        str += "<tr id='" + localCart[j].id + "'><td>" + localCart[j].id + "</td><td><img src='" + localCart[j].imgg + "' width='50px' height='50px'></td><td>" + localCart[j].name + "</td><td><div class='d-felx content-align-left'><button class='btn btn-sm btn-warning sub'><img src='minus.png' width='15px' height='15px'></button><span class='Qnty p-3'>" + num + "</span><button  class='btn btn-sm btn-success add'><img src='plus.png' width='15px' height='15px'></button><button  class='btn btn-sm btn-danger dlt'><img src='dlt.png' width='15px' height='15px'></button></div></td><td class='unit'>" + localCart[j].price + "</td><td class='total'>" + parseFloat(localCart[j].price) * num + "</td></tr>";
         tbBody.innerHTML = str;
     }
 
