@@ -208,7 +208,8 @@ function addItemsInTable(i) {
         id: i,
         name: storedItems[i].name,
         imgg: storedItems[i].itemImg,
-        price: storedItems[i].price
+        price: storedItems[i].price,
+        quantity: 1
     }
     cartList.push(newLocal);
     localStorage.setItem("cartList", JSON.stringify(cartList));
@@ -217,20 +218,53 @@ function addItemsInTable(i) {
     var str = "";
     let num = 1;
     for (let j = 0; j < localCart.length; j++) {
-        str += "<tr id='" + localCart[j].id + "'><td><img src='" + localCart[j].imgg + "' width='50px' height='50px'></td><td>" + localCart[j].name + "</td><td><div class='d-felx content-align-left'><button class='btn btn-sm btn-warning sub'><img src='minus.png' width='15px' height='15px'></button><span class='Qnty p-3'>" + num + "</span><button  class='btn btn-sm btn-success add'><img src='plus.png' width='15px' height='15px'></button><button  class='btn btn-sm btn-danger dlt'><img src='dlt.png' width='15px' height='15px'></button></div></td><td class='unit'>" + localCart[j].price + "</td><td class='total'>" + parseFloat(localCart[j].price) * num + "</td></tr>";
+        str += "<tr id='" + localCart[j].id + "'><td><img src='" + localCart[j].imgg + "' width='50px' height='50px'></td><td>" + localCart[j].name + "</td><td><div class='d-felx content-align-left'><button class='btn btn-sm btn-warning sub' onclick='downQuantityAndTotal("+ localCart[j].id +")'><img src='minus.png' width='15px' height='15px'></button><span class='Qnty p-3'>" + localCart[j].quantity + "</span><button  class='btn btn-sm btn-success add' onclick='upQuantityAndTotal("+localCart[j].id+")'><img src='plus.png' width='15px' height='15px'></button><button  class='btn btn-sm btn-danger dlt' onclick='deleteItem("+ localCart[j].id +")'><img src='dlt.png' width='15px' height='15px'></button></div></td><td class='unit'>" + localCart[j].price + "</td><td class='total'>" + parseFloat(localCart[j].price) * num + "</td></tr>";
         tbBody.innerHTML = str;
     }
 
 };
 
-function updateQuantityAndTotal(iD) {
-    var qnt = document.querySelector("Qnty");
-    var unit = document.querySelector("unit");
-    var tot = document.querySelector("total");
+function upQuantityAndTotal(iD) {
+    var row = document.getElementById(iD);
+    var qnt = row.querySelector(".Qnty");
+    var unit = row.querySelector(".unit");
+    var tot = row.querySelector(".total");
+    
+    let num = parseInt(qnt.innerHTML);
+    qnt.innerHTML = num + 1;
 
-    if (iD == "sub") {
-        qnt -= 1;
-        tot = parseFloat(qnt) * parseFloat(unit);
+    tot.innerHTML = parseInt(qnt.innerHTML)*parseFloat(unit.innerHTML);
+
+    var localCart = JSON.parse(localStorage.getItem("cartList"));
+    for (let l = 0; l < localCart.length; l++) {
+        if (iD === localCart[l].id) {
+            localCart[l].quantity = qnt.innerHTML;
+            break;
+        }
+    }
+    localStorage.setItem("cartList", JSON.stringify(localCart))
+}
+
+function downQuantityAndTotal(iD) {
+    var row = document.getElementById(iD);
+    var qnt = row.querySelector(".Qnty");
+    var unit = row.querySelector(".unit");
+    var tot = row.querySelector(".total");
+    let num = parseInt(qnt.innerHTML);
+    qnt.innerHTML = num - 1;
+    tot.innerHTML = parseInt(qnt.innerHTML)*parseFloat(unit.innerHTML);
+    if (qnt.innerHTML <= 0) {
+        qnt.innerHTML = 0;
+        deleteItem(iD);
+    } else {
+        var localCart = JSON.parse(localStorage.getItem("cartList"));
+        for (let l = 0; l < localCart.length; l++) {
+            if (iD === localCart[l].id) {
+                localCart[l].quantity = qnt.innerHTML;
+                break;
+            }
+        }
+        localStorage.setItem("cartList", JSON.stringify(localCart))
     }
 }
 
@@ -239,7 +273,8 @@ function deleteItem(i) {
     var stored = JSON.parse(localStorage.getItem("cartList"));
 
     //remove item selected, second parameter is the number of items to delete 
-    stored.splice(i, 1);
+    var posItem = stored.indexOf(i);
+    stored.splice(posItem, 1);
 
     // Put the object into storage
     localStorage.setItem("cartList", JSON.stringify(stored));
