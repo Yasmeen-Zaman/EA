@@ -51,6 +51,8 @@ const items = [
     }
 ]
 
+var obj = {};
+
 let count = 0;
 
 localStorage.setItem("items", JSON.stringify(items)); //store colors
@@ -113,7 +115,7 @@ function featuredItems() {
         minus.setAttribute("style", "position: relative; text-align:center; width: 20px; height: 20px; margin-left: 5px; float: right");
         minus.appendChild(minusImage);
         minus.style.display = 'none';
-        minus.setAttribute('onclick', 'deleteItem(' + i + ')');
+        minus.setAttribute('onclick', 'downQuantityAndTotal(' + i + ')');
 
         // create form tag
         var form = document.createElement("div");
@@ -204,22 +206,30 @@ function addItemsInTable(i) {
     var tbBody = document.getElementById("cartItem");
     var cartList = JSON.parse(localStorage.getItem("cartList")) || []
     //console.log(inLocal);
-    var newLocal = {
-        id: i,
-        name: storedItems[i].name,
-        imgg: storedItems[i].itemImg,
-        price: storedItems[i].price,
-        quantity: 1
-    }
-    cartList.push(newLocal);
-    localStorage.setItem("cartList", JSON.stringify(cartList));
-    var localCart = JSON.parse(localStorage.getItem("cartList"));
-    console.log(localCart);
-    var str = "";
-    let num = 1;
-    for (let j = 0; j < localCart.length; j++) {
-        str += "<tr id='" + localCart[j].id + "'><td><img src='" + localCart[j].imgg + "' width='50px' height='50px'></td><td>" + localCart[j].name + "</td><td><div class='d-felx content-align-left'><button class='btn btn-sm btn-warning sub' onclick='downQuantityAndTotal("+ localCart[j].id +")'><img src='minus.png' width='15px' height='15px'></button><span class='Qnty p-3'>" + localCart[j].quantity + "</span><button  class='btn btn-sm btn-success add' onclick='upQuantityAndTotal("+localCart[j].id+")'><img src='plus.png' width='15px' height='15px'></button><button  class='btn btn-sm btn-danger dlt' onclick='deleteItem("+ localCart[j].id +")'><img src='dlt.png' width='15px' height='15px'></button></div></td><td class='unit'>" + localCart[j].price + "</td><td class='total'>" + parseFloat(localCart[j].price) * num + "</td></tr>";
-        tbBody.innerHTML = str;
+    
+    //var posItem = cartList.indexOf(i);
+
+    if (i in obj) {
+        upQuantityAndTotal(i);
+    } else {
+        obj[i] = i;
+        var newLocal = {
+            id: i,
+            name: storedItems[i].name,
+            imgg: storedItems[i].itemImg,
+            price: storedItems[i].price,
+            quantity: 1
+        }
+        cartList.push(newLocal);
+        localStorage.setItem("cartList", JSON.stringify(cartList));
+        var localCart = JSON.parse(localStorage.getItem("cartList"));
+        console.log(localCart);
+        var str = "";
+        let num = 1;
+        for (let j = 0; j < localCart.length; j++) {
+            str += "<tr id='" + localCart[j].id + "'><td><img src='" + localCart[j].imgg + "' width='50px' height='50px'></td><td>" + localCart[j].name + "</td><td><div class='d-felx content-align-left'><button class='btn btn-sm btn-warning sub' onclick='downQuantityAndTotal(" + localCart[j].id + ")'><img src='minus.png' width='15px' height='15px'></button><span class='Qnty p-3'>" + localCart[j].quantity + "</span><button  class='btn btn-sm btn-success add' onclick='upQuantityAndTotal(" + localCart[j].id + ")'><img src='plus.png' width='15px' height='15px'></button><button  class='btn btn-sm btn-danger dlt' onclick='deleteItem(" + localCart[j].id + ")'><img src='dlt.png' width='15px' height='15px'></button></div></td><td class='unit'>" + localCart[j].price + "</td><td class='total'>" + parseFloat(localCart[j].price) * num + "</td></tr>";
+            tbBody.innerHTML = str;
+        }
     }
 
 };
@@ -229,11 +239,11 @@ function upQuantityAndTotal(iD) {
     var qnt = row.querySelector(".Qnty");
     var unit = row.querySelector(".unit");
     var tot = row.querySelector(".total");
-    
+
     let num = parseInt(qnt.innerHTML);
     qnt.innerHTML = num + 1;
 
-    tot.innerHTML = parseInt(qnt.innerHTML)*parseFloat(unit.innerHTML);
+    tot.innerHTML = (parseInt(qnt.innerHTML) * parseFloat(unit.innerHTML)).toFixed(2);
 
     var localCart = JSON.parse(localStorage.getItem("cartList"));
     for (let l = 0; l < localCart.length; l++) {
@@ -252,9 +262,10 @@ function downQuantityAndTotal(iD) {
     var tot = row.querySelector(".total");
     let num = parseInt(qnt.innerHTML);
     qnt.innerHTML = num - 1;
-    tot.innerHTML = parseInt(qnt.innerHTML)*parseFloat(unit.innerHTML);
+    tot.innerHTML = (parseInt(qnt.innerHTML) * parseFloat(unit.innerHTML)).toFixed(2);
     if (qnt.innerHTML <= 0) {
         qnt.innerHTML = 0;
+        delete obj[iD]
         deleteItem(iD);
     } else {
         var localCart = JSON.parse(localStorage.getItem("cartList"));
