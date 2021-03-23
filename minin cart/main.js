@@ -130,9 +130,10 @@ function featuredItems() {
 
         // overlay
         var overlay = document.createElement("div");
-        overlay.id = "over_" + i
         overlay.className = "card-img-top";
-        overlay.setAttribute("style", "position: absolute; display:none;opacity: 1");
+        overlay.classList.add('overlay')
+        overlay.setAttribute("style", "position: absolute; color: white; display: none; top: 0; bottom: 0; left: 0; right: 0; height: 100%; width: 100%; opacity: 0; transition: .5s ease; background-color: green;");
+        overlay.textContent = "1";
 
 
         //item image
@@ -153,6 +154,7 @@ function featuredItems() {
         cardTag.appendChild(tag);
         cardTag.appendChild(form);
         cardTag.appendChild(image);
+        cardTag.appendChild(overlay);
 
         // product name and description
         var cardName = document.createElement("p");
@@ -165,14 +167,14 @@ function featuredItems() {
         cardPrice.className = "card-text";
 
         var prodName = document.createTextNode(storedItems[i].name);
+        
         // creating parent div with class = "col-md-2"
         var parentTag = document.createElement("div");
         parentTag.className = 'col-md-2'
+        parentTag.id = 'id'+i;
         parentTag.classList.add("mx-2");
         parentTag.classList.add("my-1");
         parentTag.appendChild(cardTag);
-
-
 
         // tag for card body
         var cardBody = document.createElement("div"); // <div></div>
@@ -192,33 +194,33 @@ function featuredItems() {
         // append card-body to cardTag
         cardTag.appendChild(cardBody);
 
-
         container.appendChild(parentTag); // <body> <p>TEST TEXT</p> </body>
-
     }
 }
 
+var tot = 0;
 function addItemsInTable(i) {
     var x = document.getElementById("sub_" + i);
+    var TotalAll = document.getElementById('allTotal'); 
     if (x.style.display === 'none' || count > 0) {
         x.style.display = 'block';
     }
+
     var tbBody = document.getElementById("cartItem");
     var cartList = JSON.parse(localStorage.getItem("cartList")) || []
-    //console.log(inLocal);
     
-    //var posItem = cartList.indexOf(i);
-
     if (i in obj) {
         upQuantityAndTotal(i);
     } else {
+
         obj[i] = i;
         var newLocal = {
             id: i,
             name: storedItems[i].name,
             imgg: storedItems[i].itemImg,
             price: storedItems[i].price,
-            quantity: 1
+            quantity: 1,
+            subtotal: storedItems[i].price
         }
         cartList.push(newLocal);
         localStorage.setItem("cartList", JSON.stringify(cartList));
@@ -227,9 +229,12 @@ function addItemsInTable(i) {
         var str = "";
         let num = 1;
         for (let j = 0; j < localCart.length; j++) {
-            str += "<tr id='" + localCart[j].id + "'><td><img src='" + localCart[j].imgg + "' width='50px' height='50px'></td><td>" + localCart[j].name + "</td><td><div class='d-felx content-align-left'><button class='btn btn-sm btn-warning sub' onclick='downQuantityAndTotal(" + localCart[j].id + ")'><img src='minus.png' width='15px' height='15px'></button><span class='Qnty p-3'>" + localCart[j].quantity + "</span><button  class='btn btn-sm btn-success add' onclick='upQuantityAndTotal(" + localCart[j].id + ")'><img src='plus.png' width='15px' height='15px'></button><button  class='btn btn-sm btn-danger dlt' onclick='deleteItem(" + localCart[j].id + ")'><img src='dlt.png' width='15px' height='15px'></button></div></td><td class='unit'>" + localCart[j].price + "</td><td class='total'>" + parseFloat(localCart[j].price) * num + "</td></tr>";
+            num = localCart[j].quantity;
+            str += "<tr id='" + localCart[j].id + "'><td><img src='" + localCart[j].imgg + "' width='50px' height='50px'></td><td>" + localCart[j].name + "</td><td><div class='d-felx content-align-left'><button class='btn btn-sm btn-warning sub' onclick='downQuantityAndTotal(" + localCart[j].id + ")'><img src='minus.png' width='15px' height='15px'></button><span class='Qnty p-3'>" + localCart[j].quantity + "</span><button  class='btn btn-sm btn-success add' onclick='upQuantityAndTotal(" + localCart[j].id + ")'><img src='plus.png' width='15px' height='15px'></button><button  class='btn btn-sm btn-danger dlt' onclick='deleteItem(" + localCart[j].id + ")'><img src='dlt.png' width='15px' height='15px'></button></div></td><td class='unit'>" + localCart[j].price + "</td><td class='total'>" + (parseFloat(localCart[j].price) * num).toFixed(2) + "</td></tr>";
             tbBody.innerHTML = str;
+            tot = tot + (parseFloat(localCart[j].price) * num);
         }
+        TotalAll.innerHTML = tot.toFixed(2);
     }
 
 };
@@ -238,20 +243,25 @@ function upQuantityAndTotal(iD) {
     var row = document.getElementById(iD);
     var qnt = row.querySelector(".Qnty");
     var unit = row.querySelector(".unit");
-    var tot = row.querySelector(".total");
+    var subTotal = row.querySelector(".total");
 
     let num = parseInt(qnt.innerHTML);
     qnt.innerHTML = num + 1;
-
-    tot.innerHTML = (parseInt(qnt.innerHTML) * parseFloat(unit.innerHTML)).toFixed(2);
+    tot = 0;
+    subTotal.innerHTML = (parseInt(qnt.innerHTML) * parseFloat(unit.innerHTML)).toFixed(2);
 
     var localCart = JSON.parse(localStorage.getItem("cartList"));
     for (let l = 0; l < localCart.length; l++) {
+        // tot = tot + localCart[l].quantity*localCart[l].price;
         if (iD === localCart[l].id) {
             localCart[l].quantity = qnt.innerHTML;
-            break;
+            localCart[l].subtotal = subTotal.innerHTML;
+            // break;
         }
+        tot = tot + parseFloat(localCart[l].subtotal);
     }
+    var TotalAll = document.getElementById('allTotal');
+    TotalAll.innerHTML = tot.toFixed(2);
     localStorage.setItem("cartList", JSON.stringify(localCart))
 }
 
@@ -259,24 +269,29 @@ function downQuantityAndTotal(iD) {
     var row = document.getElementById(iD);
     var qnt = row.querySelector(".Qnty");
     var unit = row.querySelector(".unit");
-    var tot = row.querySelector(".total");
+    var subTotal = row.querySelector(".total");
     let num = parseInt(qnt.innerHTML);
     qnt.innerHTML = num - 1;
-    tot.innerHTML = (parseInt(qnt.innerHTML) * parseFloat(unit.innerHTML)).toFixed(2);
+    tot = 0;
+    subTotal.innerHTML = (parseInt(qnt.innerHTML) * parseFloat(unit.innerHTML)).toFixed(2);
     if (qnt.innerHTML <= 0) {
         qnt.innerHTML = 0;
         delete obj[iD]
         deleteItem(iD);
-    } else {
+    }
         var localCart = JSON.parse(localStorage.getItem("cartList"));
         for (let l = 0; l < localCart.length; l++) {
             if (iD === localCart[l].id) {
                 localCart[l].quantity = qnt.innerHTML;
-                break;
+                localCart[l].subtotal = subTotal.innerHTML;
+                // break;
             }
+            tot = tot + parseFloat(localCart[l].subtotal);
         }
+        var TotalAll = document.getElementById('allTotal');
+        TotalAll.innerHTML = tot.toFixed(2);
         localStorage.setItem("cartList", JSON.stringify(localCart))
-    }
+    
 }
 
 //delete item from table
