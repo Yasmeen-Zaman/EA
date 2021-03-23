@@ -318,5 +318,7 @@ function ClearAll() {
     val.innerHTML = "";
     contnr.innerHTML = "";
     localStorage.clear();
+    var TotalAll = document.getElementById('allTotal');
+    TotalAll.innerHTML = 0;
     featuredItems();
 }
