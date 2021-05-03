@@ -27,7 +27,7 @@ const Result = ({ myQuiz }) => {
                                         function (fetchOptions) {
                                             return (Object.values(fetchOptions).map((allOptions) => {
                                                 <RadioGroup>
-                                                    <Radio value={allOptions[1]} label={allOptions[1]} />
+                                                    <Radio value={allOptions[1]} label={allOptions[1]}>{allOptions[1]}</Radio>
                                                 </RadioGroup>
                                             })
                                             )
