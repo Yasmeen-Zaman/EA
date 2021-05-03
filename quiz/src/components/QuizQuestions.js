@@ -71,7 +71,7 @@ function QuizQuestions() {
                     <Card.Text>
                         <RadioGroup>
                             {Object.entries(option).map((allOptions) => {
-                                return <Radio value={option[1]} label={option[1]} onChange={() => CheckAnswer(allOptions[1])} />     
+                                return <Radio value={option[1]} label={option[1]} onChange={() => CheckAnswer(allOptions[1])}>{allOptions[1]}</Radio>     
                                 })
                             }
                         </RadioGroup>
